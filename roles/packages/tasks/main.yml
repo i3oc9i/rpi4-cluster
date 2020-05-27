@@ -1,14 +1,19 @@
 ---
-- name: "Update installed packages"
+- name: "Update APT repositories caches"
   apt:
-    autoremove: yes
-    upgrade: "yes"
     update_cache: yes
+    
+- name: "Upgrade installed packages"
+  apt:
+    upgrade: dist
 
-- name: "Install the following pakages"
+- name: "Install iputils-ping"
   apt:
     name: iputils-ping
     state: latest
     install_recommends: no
 
+- name: "Remove necessary packages"
+  apt:
+    autoremove: yes
 
