@@ -1,0 +1,14 @@
+---
+- name: "Update installed packages"
+  apt:
+    autoremove: yes
+    upgrade: "yes"
+    update_cache: yes
+
+- name: "Install the following pakages"
+  apt:
+    name: iputils-ping
+    state: latest
+    install_recommends: no
+
+

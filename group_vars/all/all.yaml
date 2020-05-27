@@ -1,3 +1,4 @@
+---
 ubuntu_password: "{{ vault_ubuntu_password }}"
 guest_password: "{{ vault_guest_password }}"
 

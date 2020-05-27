@@ -1,6 +1,9 @@
+---
 - name: "Create RPI4 K8S cluster"
   become: yes
   hosts: all
   roles:
   - init
+  - packages
+
 
