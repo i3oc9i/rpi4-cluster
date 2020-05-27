@@ -1,0 +1,9 @@
+---
+- name: "Update /etc/hosts for DNS"
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '^{{ hostvars[item].ansible_host }}'
+    line: "{{ hostvars[item].ansible_host }} {{ item }}"
+  with_items:
+    "{{ groups['all'] }}"
+

@@ -3,7 +3,7 @@ all:
     children:
         master:
             hosts:
-                chef
+              master-1
         worker:
             hosts:
-                chip
+              worker-1

@@ -2,18 +2,20 @@
 - name: "Update APT repositories caches"
   apt:
     update_cache: yes
+    cache_valid_time: 86400
     
 - name: "Upgrade installed packages"
   apt:
     upgrade: dist
 
-- name: "Install iputils-ping"
+- name: "Install packages"
   apt:
-    name: iputils-ping
+    name: 
+      - iputils-ping
     state: latest
     install_recommends: no
 
-- name: "Remove necessary packages"
+- name: "Remove unnecessary packages"
   apt:
     autoremove: yes
 

@@ -1,10 +1,4 @@
 ---
-- name: "Ensure SSHD is running"
-  service: 
-    name: sshd 
-    state: started 
-    enabled: yes
-
 - name: "Create standard user accounts"
   user: 
     name: "{{ item.name }}"
@@ -13,7 +7,7 @@
   - "{{ users_no_admin }}"
   no_log: true
 
-- name: "Update password for admin²"
+- name: "Update password for admin"
   user: 
     name: "{{ item.name }}"
     password: "{{ item.password | password_hash('sha512') }}"
@@ -28,4 +22,9 @@
   with_items:
   - "{{ user_admin }}"
   no_log: true
+
+- name: "Set hostname"
+  hostname:
+    name: "{{ inventory_hostname }}"
+    use: systemd
 
