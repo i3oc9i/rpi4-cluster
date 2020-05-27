@@ -1,0 +1,30 @@
+- name: "Ensure SSHD is running"
+  service: 
+    name: sshd 
+    state: started 
+    enabled: yes
+
+- name: "Create standard user accounts"
+  user: 
+    name: "{{ item.name }}"
+    password: "{{ item.password | password_hash('sha512') }}"
+  with_items:
+  - "{{ users_no_admin }}"
+  no_log: true
+
+- name: "Update password for admin²"
+  user: 
+    name: "{{ item.name }}"
+    password: "{{ item.password | password_hash('sha512') }}"
+  with_items:
+  - "{{ user_admin }}"
+  no_log: true
+
+- name: "Add authorized key for admin"
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ lookup('file', 'files/' + item.name + '_key.pub') }}"
+  with_items:
+  - "{{ user_admin }}"
+  no_log: true
+
